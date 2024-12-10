@@ -1,6 +1,5 @@
 ﻿# XML DSA PROJECT
 
-# Overview
 This project extends the functionality of an XML processing tool to provide advanced operations, including validation, correction, data transformation, visualization, and network analysis. The tool is designed to help developers and analysts work with XML files efficiently by combining essential features like beautifying, error correction, and data conversion with advanced capabilities like social network visualization and analysis.
 
 ## Features
