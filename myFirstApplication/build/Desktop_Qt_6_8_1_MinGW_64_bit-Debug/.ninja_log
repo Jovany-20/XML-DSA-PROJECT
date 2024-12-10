@@ -1,0 +1,39 @@
+# ninja log v6
+31	217	7555649438665622	myFirstApplication_autogen/timestamp	897fe6b55e2c4c97
+31	217	7555649438665622	myFirstApplication_autogen/mocs_compilation.cpp	897fe6b55e2c4c97
+225	2806	7555649440599580	CMakeFiles/myFirstApplication.dir/mainwindow.cpp.obj	7e7f9de6306a9c58
+217	2441	7555649440524050	CMakeFiles/myFirstApplication.dir/myFirstApplication_autogen/mocs_compilation.cpp.obj	67b13ea37b847b32
+31	217	7555649438665622	D:/college/3. senior 1/Data strc & Alg/project/gui/my first qt gui/myFirstApplication/build/Desktop_Qt_6_8_1_MinGW_64_bit-Debug/myFirstApplication_autogen/timestamp	897fe6b55e2c4c97
+31	217	7555649438665622	D:/college/3. senior 1/Data strc & Alg/project/gui/my first qt gui/myFirstApplication/build/Desktop_Qt_6_8_1_MinGW_64_bit-Debug/myFirstApplication_autogen/mocs_compilation.cpp	897fe6b55e2c4c97
+221	2476	7555649440564021	CMakeFiles/myFirstApplication.dir/main.cpp.obj	bd833bfffdc57b1d
+2452	2674	7553075211342072	myFirstApplication.exe	becbeb0d9e6de00a
+34	175	7555650631449331	myFirstApplication_autogen/timestamp	897fe6b55e2c4c97
+34	175	7555650631449331	myFirstApplication_autogen/mocs_compilation.cpp	897fe6b55e2c4c97
+34	175	7555650631449331	D:/college/3. senior 1/Data strc & Alg/project/gui/my first qt gui/myFirstApplication/build/Desktop_Qt_6_8_1_MinGW_64_bit-Debug/myFirstApplication_autogen/timestamp	897fe6b55e2c4c97
+34	175	7555650631449331	D:/college/3. senior 1/Data strc & Alg/project/gui/my first qt gui/myFirstApplication/build/Desktop_Qt_6_8_1_MinGW_64_bit-Debug/myFirstApplication_autogen/mocs_compilation.cpp	897fe6b55e2c4c97
+179	2418	7555650632937392	CMakeFiles/myFirstApplication.dir/main.cpp.obj	bd833bfffdc57b1d
+176	2433	7555650632907277	CMakeFiles/myFirstApplication.dir/myFirstApplication_autogen/mocs_compilation.cpp.obj	67b13ea37b847b32
+183	2819	7555650632977402	CMakeFiles/myFirstApplication.dir/mainwindow.cpp.obj	7e7f9de6306a9c58
+30	161	7555651927373536	myFirstApplication_autogen/timestamp	897fe6b55e2c4c97
+30	161	7555651927373536	myFirstApplication_autogen/mocs_compilation.cpp	897fe6b55e2c4c97
+30	161	7555651927373536	D:/college/3. senior 1/Data strc & Alg/project/gui/my first qt gui/myFirstApplication/build/Desktop_Qt_6_8_1_MinGW_64_bit-Debug/myFirstApplication_autogen/timestamp	897fe6b55e2c4c97
+30	161	7555651927373536	D:/college/3. senior 1/Data strc & Alg/project/gui/my first qt gui/myFirstApplication/build/Desktop_Qt_6_8_1_MinGW_64_bit-Debug/myFirstApplication_autogen/mocs_compilation.cpp	897fe6b55e2c4c97
+162	2378	7555651928735886	CMakeFiles/myFirstApplication.dir/myFirstApplication_autogen/mocs_compilation.cpp.obj	67b13ea37b847b32
+166	2405	7555651928773255	CMakeFiles/myFirstApplication.dir/main.cpp.obj	bd833bfffdc57b1d
+170	2728	7555651928808430	CMakeFiles/myFirstApplication.dir/mainwindow.cpp.obj	7e7f9de6306a9c58
+30	222	7555652430761907	myFirstApplication_autogen/timestamp	897fe6b55e2c4c97
+30	222	7555652430761907	myFirstApplication_autogen/mocs_compilation.cpp	897fe6b55e2c4c97
+30	222	7555652430761907	D:/college/3. senior 1/Data strc & Alg/project/gui/my first qt gui/myFirstApplication/build/Desktop_Qt_6_8_1_MinGW_64_bit-Debug/myFirstApplication_autogen/timestamp	897fe6b55e2c4c97
+30	222	7555652430761907	D:/college/3. senior 1/Data strc & Alg/project/gui/my first qt gui/myFirstApplication/build/Desktop_Qt_6_8_1_MinGW_64_bit-Debug/myFirstApplication_autogen/mocs_compilation.cpp	897fe6b55e2c4c97
+223	2533	7555652432687541	CMakeFiles/myFirstApplication.dir/myFirstApplication_autogen/mocs_compilation.cpp.obj	67b13ea37b847b32
+227	2600	7555652432722706	CMakeFiles/myFirstApplication.dir/main.cpp.obj	bd833bfffdc57b1d
+230	2980	7555652432752751	CMakeFiles/myFirstApplication.dir/mainwindow.cpp.obj	7e7f9de6306a9c58
+2980	3145	7555652460218479	myFirstApplication.exe	becbeb0d9e6de00a
+32	181	7555654353875048	myFirstApplication_autogen/timestamp	897fe6b55e2c4c97
+32	181	7555654353875048	myFirstApplication_autogen/mocs_compilation.cpp	897fe6b55e2c4c97
+32	181	7555654353875048	D:/college/3. senior 1/Data strc & Alg/project/gui/my first qt gui/myFirstApplication/build/Desktop_Qt_6_8_1_MinGW_64_bit-Debug/myFirstApplication_autogen/timestamp	897fe6b55e2c4c97
+32	181	7555654353875048	D:/college/3. senior 1/Data strc & Alg/project/gui/my first qt gui/myFirstApplication/build/Desktop_Qt_6_8_1_MinGW_64_bit-Debug/myFirstApplication_autogen/mocs_compilation.cpp	897fe6b55e2c4c97
+182	2788	7555654355373664	CMakeFiles/myFirstApplication.dir/myFirstApplication_autogen/mocs_compilation.cpp.obj	67b13ea37b847b32
+186	2871	7555654355418949	CMakeFiles/myFirstApplication.dir/main.cpp.obj	bd833bfffdc57b1d
+190	3270	7555654355459671	CMakeFiles/myFirstApplication.dir/mainwindow.cpp.obj	7e7f9de6306a9c58
+3270	3460	7555654386254689	myFirstApplication.exe	becbeb0d9e6de00a
