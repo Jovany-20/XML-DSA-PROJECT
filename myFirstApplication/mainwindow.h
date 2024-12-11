@@ -30,6 +30,8 @@ private slots:
 
     void on_convertToJSONButton_clicked();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::MainWindow *ui;
 };

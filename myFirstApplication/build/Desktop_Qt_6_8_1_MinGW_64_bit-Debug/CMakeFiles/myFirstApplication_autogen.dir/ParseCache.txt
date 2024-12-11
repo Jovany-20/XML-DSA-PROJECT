@@ -362,6 +362,6 @@ D:/college/3. senior 1/Data strc & Alg/project/gui/my first qt gui/myFirstApplic
  mdp:C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h
  mdp:D:/college/3. senior 1/Data strc & Alg/project/gui/my first qt gui/myFirstApplication/build/Desktop_Qt_6_8_1_MinGW_64_bit-Debug/myFirstApplication_autogen/moc_predefs.h
  mdp:D:/college/3. senior 1/Data strc & Alg/project/gui/my first qt gui/myFirstApplication/mainwindow.h
+D:/college/3. senior 1/Data strc & Alg/project/gui/my first qt gui/myFirstApplication/main.cpp
 D:/college/3. senior 1/Data strc & Alg/project/gui/my first qt gui/myFirstApplication/mainwindow.cpp
  uic:./ui_mainwindow.h
-D:/college/3. senior 1/Data strc & Alg/project/gui/my first qt gui/myFirstApplication/main.cpp

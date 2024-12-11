@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtGui/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenu>
@@ -28,16 +29,23 @@ class Ui_MainWindow
 public:
     QWidget *centralwidget;
     QPushButton *pushButton;
-    QPushButton *checkValidationButton;
     QPushButton *pushButton_3;
-    QPushButton *pushButton_4;
-    QPushButton *convertToJSONButton;
-    QPushButton *minifyButton;
-    QPushButton *compressButton;
-    QPushButton *decompressButton;
     QPushButton *pushButton_9;
     QLabel *label;
     QPlainTextEdit *outputArea;
+    QPlainTextEdit *inputArea;
+    QLabel *label_2;
+    QLabel *label_3;
+    QWidget *widget;
+    QHBoxLayout *horizontalLayout;
+    QPushButton *minifyButton;
+    QPushButton *pushButton_4;
+    QPushButton *checkValidationButton;
+    QWidget *widget1;
+    QHBoxLayout *horizontalLayout_2;
+    QPushButton *decompressButton;
+    QPushButton *compressButton;
+    QPushButton *convertToJSONButton;
     QMenuBar *menubar;
     QMenu *menuxml;
     QStatusBar *statusbar;
@@ -51,37 +59,70 @@ public:
         centralwidget->setObjectName("centralwidget");
         pushButton = new QPushButton(centralwidget);
         pushButton->setObjectName("pushButton");
-        pushButton->setGeometry(QRect(180, 40, 83, 29));
-        checkValidationButton = new QPushButton(centralwidget);
-        checkValidationButton->setObjectName("checkValidationButton");
-        checkValidationButton->setGeometry(QRect(20, 110, 121, 29));
+        pushButton->setGeometry(QRect(170, 10, 83, 29));
         pushButton_3 = new QPushButton(centralwidget);
         pushButton_3->setObjectName("pushButton_3");
-        pushButton_3->setGeometry(QRect(150, 110, 83, 29));
-        pushButton_4 = new QPushButton(centralwidget);
-        pushButton_4->setObjectName("pushButton_4");
-        pushButton_4->setGeometry(QRect(20, 180, 101, 29));
-        convertToJSONButton = new QPushButton(centralwidget);
-        convertToJSONButton->setObjectName("convertToJSONButton");
-        convertToJSONButton->setGeometry(QRect(10, 320, 121, 29));
-        minifyButton = new QPushButton(centralwidget);
-        minifyButton->setObjectName("minifyButton");
-        minifyButton->setGeometry(QRect(20, 250, 91, 29));
-        compressButton = new QPushButton(centralwidget);
-        compressButton->setObjectName("compressButton");
-        compressButton->setGeometry(QRect(10, 390, 91, 29));
-        decompressButton = new QPushButton(centralwidget);
-        decompressButton->setObjectName("decompressButton");
-        decompressButton->setGeometry(QRect(110, 390, 91, 29));
+        pushButton_3->setGeometry(QRect(530, 440, 83, 29));
         pushButton_9 = new QPushButton(centralwidget);
         pushButton_9->setObjectName("pushButton_9");
-        pushButton_9->setGeometry(QRect(240, 110, 83, 29));
+        pushButton_9->setGeometry(QRect(530, 490, 83, 29));
         label = new QLabel(centralwidget);
         label->setObjectName("label");
-        label->setGeometry(QRect(30, 40, 181, 20));
+        label->setGeometry(QRect(20, 10, 151, 20));
         outputArea = new QPlainTextEdit(centralwidget);
         outputArea->setObjectName("outputArea");
-        outputArea->setGeometry(QRect(340, 10, 291, 531));
+        outputArea->setGeometry(QRect(340, 60, 291, 311));
+        inputArea = new QPlainTextEdit(centralwidget);
+        inputArea->setObjectName("inputArea");
+        inputArea->setGeometry(QRect(10, 60, 311, 311));
+        label_2 = new QLabel(centralwidget);
+        label_2->setObjectName("label_2");
+        label_2->setGeometry(QRect(110, 40, 181, 20));
+        label_3 = new QLabel(centralwidget);
+        label_3->setObjectName("label_3");
+        label_3->setGeometry(QRect(450, 40, 181, 20));
+        widget = new QWidget(centralwidget);
+        widget->setObjectName("widget");
+        widget->setGeometry(QRect(20, 430, 307, 31));
+        horizontalLayout = new QHBoxLayout(widget);
+        horizontalLayout->setObjectName("horizontalLayout");
+        horizontalLayout->setContentsMargins(0, 0, 0, 0);
+        minifyButton = new QPushButton(widget);
+        minifyButton->setObjectName("minifyButton");
+
+        horizontalLayout->addWidget(minifyButton);
+
+        pushButton_4 = new QPushButton(widget);
+        pushButton_4->setObjectName("pushButton_4");
+
+        horizontalLayout->addWidget(pushButton_4);
+
+        checkValidationButton = new QPushButton(widget);
+        checkValidationButton->setObjectName("checkValidationButton");
+
+        horizontalLayout->addWidget(checkValidationButton);
+
+        widget1 = new QWidget(centralwidget);
+        widget1->setObjectName("widget1");
+        widget1->setGeometry(QRect(20, 490, 304, 31));
+        horizontalLayout_2 = new QHBoxLayout(widget1);
+        horizontalLayout_2->setObjectName("horizontalLayout_2");
+        horizontalLayout_2->setContentsMargins(0, 0, 0, 0);
+        decompressButton = new QPushButton(widget1);
+        decompressButton->setObjectName("decompressButton");
+
+        horizontalLayout_2->addWidget(decompressButton);
+
+        compressButton = new QPushButton(widget1);
+        compressButton->setObjectName("compressButton");
+
+        horizontalLayout_2->addWidget(compressButton);
+
+        convertToJSONButton = new QPushButton(widget1);
+        convertToJSONButton->setObjectName("convertToJSONButton");
+
+        horizontalLayout_2->addWidget(convertToJSONButton);
+
         MainWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(MainWindow);
         menubar->setObjectName("menubar");
@@ -104,15 +145,17 @@ public:
     {
         MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
         pushButton->setText(QCoreApplication::translate("MainWindow", "Browse", nullptr));
-        checkValidationButton->setText(QCoreApplication::translate("MainWindow", "Check Validation", nullptr));
         pushButton_3->setText(QCoreApplication::translate("MainWindow", "Solve Error", nullptr));
-        pushButton_4->setText(QCoreApplication::translate("MainWindow", "Prettify XML", nullptr));
-        convertToJSONButton->setText(QCoreApplication::translate("MainWindow", "Convert to JSON", nullptr));
-        minifyButton->setText(QCoreApplication::translate("MainWindow", "Minify XML", nullptr));
-        compressButton->setText(QCoreApplication::translate("MainWindow", "Compress", nullptr));
-        decompressButton->setText(QCoreApplication::translate("MainWindow", "Decompress", nullptr));
         pushButton_9->setText(QCoreApplication::translate("MainWindow", "Cancel", nullptr));
-        label->setText(QCoreApplication::translate("MainWindow", "type your XML file or ", nullptr));
+        label->setText(QCoreApplication::translate("MainWindow", "Type your XML file or ", nullptr));
+        label_2->setText(QCoreApplication::translate("MainWindow", "Input", nullptr));
+        label_3->setText(QCoreApplication::translate("MainWindow", "Output", nullptr));
+        minifyButton->setText(QCoreApplication::translate("MainWindow", "Minify XML", nullptr));
+        pushButton_4->setText(QCoreApplication::translate("MainWindow", "Prettify XML", nullptr));
+        checkValidationButton->setText(QCoreApplication::translate("MainWindow", "Check Validation", nullptr));
+        decompressButton->setText(QCoreApplication::translate("MainWindow", "Decompress", nullptr));
+        compressButton->setText(QCoreApplication::translate("MainWindow", "Compress", nullptr));
+        convertToJSONButton->setText(QCoreApplication::translate("MainWindow", "Convert to JSON", nullptr));
         menuxml->setTitle(QCoreApplication::translate("MainWindow", "xml", nullptr));
     } // retranslateUi
 
