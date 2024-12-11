@@ -1,4 +1,6 @@
-```vector<int> tokensLines;
+#include "..\Header Files\XML_Validor.h"
+
+vector<int> tokensLines;
 vector<int> tokensIndex;
 
 vector<string> errors_found;
@@ -135,4 +137,27 @@ void XMLTags(string input) {
             tokensLines.push_back(line);
         }
     }
+}
+
+string readXMLFile(const string& fileName) {
+    /*
+    This Function is used to read the content of an XML file
+
+    Parameters:
+    fileName (string): The name of the XML file to read
+
+    Returns:
+    string: The content of the XML file
+    */
+    ifstream ReadFile(fileName);
+    if (!ReadFile.is_open()) {
+        cerr << "Error: Unable to open file " << fileName << endl;
+        exit(1);
+    }
+    string line, content;
+    while (getline(ReadFile, line)) {
+        content += line + "\n";
+    }
+    ReadFile.close();
+    return content;
 }
