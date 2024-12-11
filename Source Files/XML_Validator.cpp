@@ -2,7 +2,7 @@
 
 vector<int> tokensLines;
 vector<int> tokensIndex;
-
+vector<string> tokens;
 vector<string> errors_found;
 vector<int> errors_locations;
 vector<int> errors_index;
