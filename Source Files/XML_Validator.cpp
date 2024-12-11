@@ -76,3 +76,63 @@ bool ValidateXML(string input) {
     ERROR_VIEWER(errors_found, errors_locations, error_type);
     return errors_found.empty();
 }
+
+void ERROR_VIEWER(vector<string> errors_found, vector<int> errors_locations, vector<int> error_type) {
+    /*
+    This Function is used to view the errors found in the XML tags
+
+    Parameters:
+    errors_found (vector<string>): The vector containing the wrong tags
+    errors_locations (vector<int>): The vector containing the error line numbers
+    error_type (vector<int>): The vector containing the error types
+
+    Returns:
+    void
+    */
+    if (errors_found.empty()) return;
+    cout << "Errors Found:" << endl;
+    for (int i = 0; i < errors_found.size(); i++) {
+        cout << "Tag: " << errors_found[i] << " Line: " << errors_locations[i] << " ,Error: ";
+        switch (error_type[i]) {
+            case 1:
+                cout << "Unopened closed tag!" << endl;
+                break;
+            case 2:
+                cout << "Unclosed tag!" << endl;
+                break;
+        }
+    }
+}
+void XMLTags(string input) {
+    /*
+    This Function is used to seperate the tags from the input string
+
+    Parameters:
+    input (string): The input string containing the XML tags
+
+    Returns:
+    void
+    */
+    tokens.clear();
+    tokensLines.clear();
+    tokensIndex.clear();
+    int line = 1;
+    for (int i = 0; i < input.length(); i++) {
+        if (input[i] == '\n') line++;
+        if (input[i] == '<') {
+            tokensIndex.push_back(i);
+            string token = "<";
+            int j;
+            for (j = i + 1; j < input.length(); j++) {
+                if (input[j] == '>') {
+                    token += input[j];
+                    break;
+                }
+                token += input[j];
+            }
+            i = j;
+            tokens.push_back(token);
+            tokensLines.push_back(line);
+        }
+    }
+}
