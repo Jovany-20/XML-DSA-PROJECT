@@ -21,5 +21,6 @@ vector<string> parseXML(const string& input);
 string formatWithTabsAndWordWrap(const std::string& str, size_t width);
 Tree* buildTree(const vector<string>& xmlStrings);
 string formatXML(Tree* node, int depth);
+string format (string xmlData);
 
 #endif // FORMAT_H
