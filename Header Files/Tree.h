@@ -3,11 +3,11 @@
 
 #include <string>
 #include <vector>
-
+using namespace std;
 class Tree {
 public:
     string val;                     // Node value
-    vector<Tree*> pointers;         // Child nodes
+    vector <Tree*> pointers;         // Child nodes
 
     // Default constructor
     Tree() : val("") {}
