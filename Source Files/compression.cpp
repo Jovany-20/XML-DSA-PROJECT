@@ -1,17 +1,17 @@
-/*
-This Function is used to encode a given string using LZW compression and save the output codes to a binary file.(the input string in our case is XML file)
-
-Parameters:
-input (const std::string&): The input string that needs to be compressed.
-fileName (const std::string&): The name of the binary file where the encoded output will be saved.
-
-Returns:
-bool: Returns true if encoding and saving are successful, otherwise returns false.
-*/
-
 #include "compression.h"
 
 bool encodeAndSave(const std::string& input, const std::string& fileName) {
+    /*
+    This Function is used to encode a given string using LZW compression and save the output codes to a binary file.(the input string in our case is XML file)
+    
+    Parameters:
+    input (const std::string&): The input string that needs to be compressed.
+    fileName (const std::string&): The name of the binary file where the encoded output will be saved.
+    
+    Returns:
+    bool: Returns true if encoding and saving are successful, otherwise returns false.
+    */
+
     //std::cout << "Encoding:\n";
 
     // Initialize the dictionary with single-character entries 
