@@ -1,6 +1,45 @@
 
 #include "../Header Files/xmltojson.h"
 
+
+
+string RemoveSpaces(string rawXML) {
+  /**
+ * Removes unnecessary spaces, tabs, carriage returns, and newlines from the raw XML string.
+ *
+ * @param rawXML A string containing the raw XML data, which may include redundant spaces
+ *               and whitespace characters such as '\n', '\r', and '\t'.
+ *
+ * @return string A cleaned version of the input XML string with unnecessary spaces
+ *                and whitespace characters removed.
+ */
+    string cleanedXML = "";
+    string CurrentChar, nextChar;
+    int xmlLength = rawXML.length();
+    int i = 0;
+
+    while (i < xmlLength) {
+        CurrentChar = rawXML[i];
+
+        nextChar = rawXML[i + 1];
+
+        if (CurrentChar == " " && nextChar == " ") {
+            i += 2;
+        }
+
+        else if (CurrentChar == "\r" || CurrentChar == "\n" || CurrentChar == "\t") {
+            i++;
+        }
+
+        else {
+            cleanedXML += CurrentChar;
+            i++;
+        }
+
+    }
+    return cleanedXML;
+}
+
 string processOpeningTag(string& xmlData, int& i, stack<string>& openTags,
     stack<string>& unmatchedTags, stack<bool>& isOpeningTag,
     stack<string>& bracketStack, stack<int>& arrayStartIndices,
@@ -198,3 +237,110 @@ Returns:
     isOpeningTag.push(false); // Mark it as a closing tag
 }
 
+
+void processData(string& xmlData, int& i, string& jsonResult, int& jsonIndex) {
+/**
+ * Processes the data between XML tags and appends it to the JSON result.
+ *
+ * @param xmlData      The input XML data string being processed.
+ * @param i            The current index within the XML string (passed by reference).
+ * @param jsonResult   The string holding the resulting JSON structure.
+ * @param jsonIndex    An integer tracking the current position within the JSON string.
+ *
+ * @return void        Modifies jsonResult and jsonIndex in place.
+ */
+
+    // Store the current character at the current position 'i' as a string.
+    string currentChar = std::string(1, xmlData[i]);
+
+    // Begin appending the data value as a JSON string
+    jsonResult += "\"";   // Add an opening double quote for the data value
+    jsonIndex++;          // Increment JSON index to account for the added quote
+
+    // Process all characters until encountering an opening '<' (start of a tag).
+    while (currentChar != "<") {
+        jsonResult += currentChar; // Append the current character to the JSON result
+        jsonIndex++;               // Increment JSON index as a character is added
+
+        i++;                       // Move to the next character in the XML data
+        currentChar = std::string(1, xmlData[i]); // Update the current character
+    }
+
+    // Once '<' is reached, close the data string with a quote and append a comma.
+    jsonResult += "\","; // Add closing double quote and a comma
+    jsonIndex += 2;      // Increment JSON index for the closing quote and comma
+}
+
+
+
+string convertXMLToJSON(string xmlData) {
+  /**
+ * Converts an XML string into a JSON-formatted string.
+ *
+ * @param xmlData  The input XML string to be converted to JSON format.
+ *
+ * @return A JSON-formatted string representing the structure and data of the XML input.
+ */
+    // Length of the input XML string
+    int xmlLength = xmlData.length();
+
+    // JSON result string begins with an opening brace '{'
+    string jsonResult = "{";
+
+    // Temporary buffers and variables for processing
+    string tempBuffer = "*";  // Buffer used for temporary character storage
+    string currentChar, tempWord = "";
+    int i = 0;          // Current position in the XML string
+    int jsonIndex = 1;  // Tracks position in the JSON result string
+    int arrayIndex = 0; // Position for handling arrays in JSON
+
+    // Stacks used for tracking tags and structure
+    stack<string> openTags, unmatchedTags, bracketStack; // Tag and bracket tracking
+    stack<bool> isOpeningTag;                           // Flags for open/close tags
+    stack<int> arrayStartIndices;                       // Tracks array positions
+
+    // Variables for last closed tag and last bracket
+    string lastClosedTag, lastBracket;
+
+    // Iterate through the XML string character by character
+    while (i < xmlLength) {
+        currentChar = std::string(1, xmlData[i]);
+
+        // Skip carriage returns and newlines
+        if (currentChar == "\r" || currentChar == "\n") {
+            i++;
+            continue;
+        }
+
+        // If a '<' character is encountered, process a tag
+        if (currentChar == "<") {
+            i++; // Move to the next character after '<'
+            currentChar = std::string(1, xmlData[i]);
+
+            if (currentChar != "/") {
+                // Process an opening tag if it is not a closing tag ('/')
+                processOpeningTag(xmlData, i, openTags, unmatchedTags, isOpeningTag,
+                    bracketStack, arrayStartIndices, jsonResult,
+                    jsonIndex, arrayIndex, lastClosedTag, lastBracket);
+            }
+            else {
+                // Process a closing tag
+                processClosingTag(xmlData, i, unmatchedTags, isOpeningTag,
+                    bracketStack, jsonResult, jsonIndex,
+                    arrayStartIndices, lastClosedTag, lastBracket,
+                    arrayIndex);
+            }
+        }
+        else {
+            // Process data (content between tags)
+            processData(xmlData, i, jsonResult, jsonIndex);
+        }
+    }
+
+    // Add the final closing brace for the JSON result
+    jsonResult += "\n}";
+    jsonIndex += 2;
+
+
+    return jsonResult;
+}
