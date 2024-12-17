@@ -29,37 +29,84 @@ Returns:
 */
 
 
-    string tempWord = "";
-    string currentChar = std::string(1, xmlData[i]);
+    string tempWord = ""; // Temporary variable to store the tag name
+    string currentChar = std::string(1, xmlData[i]); // Read the current character
 
-
-
+    // Loop to read the tag name until '>' is encountered
     while (currentChar != ">") {
-        tempWord += currentChar;
-        i++;
-        currentChar = std::string(1, xmlData[i]); // Fixed issue here
+        tempWord += currentChar; // Append character to the tag name
+        i++; // Move to the next character
+        currentChar = std::string(1, xmlData[i]);
     }
 
+    // Check if the current tag is the last closed tag
     if (tempWord == lastClosedTag) {
+        // Remove the redundant tag content and replace it with an array bracket '['
         jsonResult.erase(arrayIndex - ((bracketStack.size() + 1)) - 2, tempWord.length() + 6 + ((bracketStack.size() + 1)));
         jsonIndex -= (tempWord.length() + 6 + ((bracketStack.size() + 1)));
         jsonResult.insert(arrayIndex - ((bracketStack.size() + 1)) - 2, "[\n");
         jsonIndex += 2;
-        bracketStack.pop();
-        bracketStack.push("]");
+
+        bracketStack.pop();      // Pop the last bracket
+        bracketStack.push("]");  // Replace with a closing square bracket ']'
+
+        // Manage array indices for JSON arrays
         if (!arrayStartIndices.empty()) {
             arrayStartIndices.pop();
             if (!arrayStartIndices.empty()) {
                 arrayIndex = arrayStartIndices.top();
             }
         }
-        i++;
-        openTags.push(tempWord);
-        unmatchedTags.push(tempWord);
-        isOpeningTag.push(true);
+
+        i++; // Move past the closing '>'
+        openTags.push(tempWord);       // Push the tag onto the open tags stack
+        unmatchedTags.push(tempWord);  // Push to unmatched tags
+        isOpeningTag.push(true);       // Mark it as an opening tag
         jsonResult += "\n";
         jsonIndex++;
-        return tempWord;
+        return tempWord; // Return the tag name
+    }
+
+    // Add a new line if open tags stack is empty
+    if (openTags.empty()) {
+        jsonResult += "\n";
+    }
+    // Otherwise, check if the previous tag was not an opening tag
+    else if (!isOpeningTag.top()) {
+        jsonResult += "\n";
+        jsonIndex++;
+    }
+    // Handle formatting for nested tags
+    else {
+        for (int t = bracketStack.size() + 1; t > 0; t--) {
+            jsonResult += " "; // Add appropriate indentation
+            jsonIndex++;
+        }
+        jsonResult += "{\n"; // Start a new JSON object
+        jsonIndex += 2;
+
+        // Check if the current tag indicates the start of a JSON array
+        if (tempWord + "s" == openTags.top()) {
+            arrayIndex = jsonIndex + bracketStack.size() + 3;
+            arrayStartIndices.push(arrayIndex);
+        }
+        bracketStack.push("}"); // Push closing curly bracket
+    }
+
+    // Add the tag name as a JSON key
+    for (int t = bracketStack.size() + 1; t > 0; t--) {
+        jsonResult += " ";
+        jsonIndex++;
+    }
+    jsonResult += "\"" + tempWord + "\": ";
+    jsonIndex += tempWord.length() + 4;
+
+    openTags.push(tempWord);       // Push the tag onto the open tags stack
+    unmatchedTags.push(tempWord);  // Mark it as unmatched
+    isOpeningTag.push(true);       // Mark it as an opening tag
+    i++; // Move past the closing '>'
+    return tempWord; // Return the tag name
+    
     }
 
     if (openTags.empty()) {
@@ -121,20 +168,23 @@ Parameters:
 Returns:
 - void
 */
-    string tempWord = "";
-    string currentChar = std::string(1, xmlData[i]); // Fixed issue here
+    string tempWord = ""; // Temporary variable to store the tag name
+    string currentChar = std::string(1, xmlData[i]);
 
+    // Loop to read the tag name until '>' is encountered
     while (currentChar != ">") {
         i++;
-        currentChar = std::string(1, xmlData[i]); // Fixed issue here
+        currentChar = std::string(1, xmlData[i]);
         tempWord += currentChar;
     }
-    tempWord.pop_back();
+    tempWord.pop_back(); // Remove the trailing '>'
 
+    // Check if the tag matches the last unmatched tag
     if (tempWord == unmatchedTags.top()) {
-        lastClosedTag = tempWord;
-        unmatchedTags.pop();
+        lastClosedTag = tempWord; // Update the last closed tag
+        unmatchedTags.pop();      // Remove it from the unmatched tags stack
 
+        // Handle array elements
         int count = lastClosedTag.length();
         string currentWord = std::string(1, jsonResult[arrayIndex + 1]);
         for (int L = arrayIndex + 2; L < arrayIndex + count; L++) {
@@ -148,9 +198,11 @@ Returns:
         }
     }
 
+    // Check formatting for closing tags
     if (!isOpeningTag.top()) {
-        string back = std::string(1, jsonResult.back()); // Fixed issue here
+        string back = std::string(1, jsonResult.back()); // Get the last character in JSON
 
+        // Remove unnecessary trailing commas or spaces
         if ((bracketStack.top() == "]" && lastBracket == "}") ||
             (bracketStack.top() == "}" && back == ",") ||
             (bracketStack.top() == "]" && back == ",")) {
@@ -160,19 +212,23 @@ Returns:
         jsonResult += "\n";
         jsonIndex++;
 
+        // Add indentation and the closing bracket
         for (int t = bracketStack.size(); t > 0; t--) {
             jsonResult += " ";
             jsonIndex++;
         }
-        jsonResult += bracketStack.top();
+        jsonResult += bracketStack.top(); // Insert the correct bracket
         lastBracket = bracketStack.top();
         jsonIndex++;
-        bracketStack.pop();
+        bracketStack.pop(); // Remove the last bracket
+
+        // Add a trailing comma if needed
         if (!bracketStack.empty()) {
             jsonResult += ",";
             jsonIndex++;
         }
     }
-    i++;
-    isOpeningTag.push(false);
+
+    i++; // Move past the closing '>'
+    isOpeningTag.push(false); // Mark it as a closing tag
 }
