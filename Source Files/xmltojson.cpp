@@ -7,6 +7,7 @@ string processOpeningTag(string& xmlData, int& i, stack<string>& openTags,
     string& jsonResult, int& jsonIndex, int& arrayIndex,
     string& lastClosedTag, string& lastBracket) {
 
+
 /*
 This Function processes an opening tag in the XML string, updates the JSON result string, and manages various stacks that track open tags, unmatched tags, and formatting states.
 
@@ -27,7 +28,6 @@ Parameters:
 Returns:
 - string: The name of the opening tag that was processed.
 */
-
 
     string tempWord = ""; // Temporary variable to store the tag name
     string currentChar = std::string(1, xmlData[i]); // Read the current character
@@ -106,49 +106,13 @@ Returns:
     isOpeningTag.push(true);       // Mark it as an opening tag
     i++; // Move past the closing '>'
     return tempWord; // Return the tag name
-    
-    }
-
-    if (openTags.empty()) {
-        jsonResult += "\n";
-    }
-    else if (!isOpeningTag.top()) {
-        jsonResult += "\n";
-        jsonIndex++;
-    }
-    else {
-        for (int t = bracketStack.size() + 1; t > 0; t--) {
-            jsonResult += " ";
-            jsonIndex++;
-        }
-        jsonResult += "{\n";
-        jsonIndex += 2;
-
-        if (tempWord + "s" == openTags.top()) {
-            arrayIndex = jsonIndex + bracketStack.size() + 3;
-            arrayStartIndices.push(arrayIndex);
-        }
-        bracketStack.push("}");
-    }
-
-    for (int t = bracketStack.size() + 1; t > 0; t--) {
-        jsonResult += " ";
-        jsonIndex++;
-    }
-    jsonResult += "\"" + tempWord + "\": ";
-    jsonIndex += tempWord.length() + 4;
-
-    openTags.push(tempWord);
-    unmatchedTags.push(tempWord);
-    isOpeningTag.push(true);
-    i++;
-    return tempWord;
 }
 
 void processClosingTag(string& xmlData, int& i, stack<string>& unmatchedTags, stack<bool>& isOpeningTag,
     stack<string>& bracketStack, string& jsonResult, int& jsonIndex,
     stack<int>& arrayStartIndices, string& lastClosedTag, string& lastBracket,
     int& arrayIndex) {
+
 /*
 This Function processes a closing tag in the XML string, updates the JSON result string, and ensures proper handling of unmatched tags, brackets, and arrays.
 
@@ -168,6 +132,7 @@ Parameters:
 Returns:
 - void
 */
+
     string tempWord = ""; // Temporary variable to store the tag name
     string currentChar = std::string(1, xmlData[i]);
 
@@ -232,3 +197,4 @@ Returns:
     i++; // Move past the closing '>'
     isOpeningTag.push(false); // Mark it as a closing tag
 }
+
