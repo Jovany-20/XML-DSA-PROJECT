@@ -6,6 +6,29 @@ string processOpeningTag(string& xmlData, int& i, stack<string>& openTags,
     stack<string>& bracketStack, stack<int>& arrayStartIndices,
     string& jsonResult, int& jsonIndex, int& arrayIndex,
     string& lastClosedTag, string& lastBracket) {
+
+/*
+This Function processes an opening tag in the XML string, updates the JSON result string, and manages various stacks that track open tags, unmatched tags, and formatting states.
+
+Parameters:
+- xmlData (string&): The input XML string being processed.
+- i (int&): The current index being read from the XML string.
+- openTags (stack<string>&): Stack storing currently open XML tags.
+- unmatchedTags (stack<string>&): Stack storing unmatched XML tags.
+- isOpeningTag (stack<bool>&): Stack indicating whether the last tag processed was an opening tag.
+- bracketStack (stack<string>&): Stack managing the brackets used for JSON formatting ("{" and "}").
+- arrayStartIndices (stack<int>&): Stack storing indices for array elements in the JSON result.
+- jsonResult (string&): The resulting JSON string being built.
+- jsonIndex (int&): The current index of the JSON string being modified.
+- arrayIndex (int&): The start index of the current JSON array.
+- lastClosedTag (string&): The last tag that was closed in the XML.
+- lastBracket (string&): The last bracket inserted into the JSON string.
+
+Returns:
+- string: The name of the opening tag that was processed.
+*/
+
+
     string tempWord = "";
     string currentChar = std::string(1, xmlData[i]);
 
@@ -79,6 +102,25 @@ void processClosingTag(string& xmlData, int& i, stack<string>& unmatchedTags, st
     stack<string>& bracketStack, string& jsonResult, int& jsonIndex,
     stack<int>& arrayStartIndices, string& lastClosedTag, string& lastBracket,
     int& arrayIndex) {
+/*
+This Function processes a closing tag in the XML string, updates the JSON result string, and ensures proper handling of unmatched tags, brackets, and arrays.
+
+Parameters:
+- xmlData (string&): The input XML string being processed.
+- i (int&): The current index being read from the XML string.
+- unmatchedTags (stack<string>&): Stack storing unmatched XML tags.
+- isOpeningTag (stack<bool>&): Stack indicating whether the last tag processed was an opening tag.
+- bracketStack (stack<string>&): Stack managing the brackets used for JSON formatting ("{" and "}").
+- jsonResult (string&): The resulting JSON string being built.
+- jsonIndex (int&): The current index of the JSON string being modified.
+- arrayStartIndices (stack<int>&): Stack storing indices for array elements in the JSON result.
+- lastClosedTag (string&): The last tag that was closed in the XML.
+- lastBracket (string&): The last bracket inserted into the JSON string.
+- arrayIndex (int&): The start index of the current JSON array.
+
+Returns:
+- void
+*/
     string tempWord = "";
     string currentChar = std::string(1, xmlData[i]); // Fixed issue here
 
