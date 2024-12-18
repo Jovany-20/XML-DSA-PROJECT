@@ -10,4 +10,4 @@
 // Function to decode a list of codes using LZW algorithm
 bool decodeFromFile(const std::string& fileName);
 
-#endif // DECOMPRESSION_H
+#endif /
