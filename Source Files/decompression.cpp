@@ -1,6 +1,15 @@
 #include "decompression.h"
 
 bool decodeFromFile(const std::string& fileName) {
+    /*
+This Function is used to decode a file using LZW compression algorithm.
+
+Parameters:
+fileName (const std::string&): The name of the file to be decoded.
+
+Returns:
+bool: Returns true if decoding is successful, otherwise returns false.
+*/
     std::cout << "\nDecoding:\n";
 
     // Initialize the dictionary with single-character entries
