@@ -1,4 +1,4 @@
-#include "..\Header Files\minifying.h
+#include "..\Header Files\minifying.h"
 /*
     This function removes unnecessary whitespace outside XML tags.
 
