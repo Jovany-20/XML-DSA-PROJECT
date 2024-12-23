@@ -1,8 +1,4 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <sstream>
-using namespace std;  
+#include "..\Header Files\minifying.h
 /*
     This function removes unnecessary whitespace outside XML tags.
 
