@@ -80,27 +80,3 @@ void writeXMLToFile(const string& fileName, const string& xmlContent) {
     cout << "XML Minification complete. Minified file: " << fileName << endl;
 }
 
-/*
-    Main function to handle XML minification from input to output files.
-
-    Parameters:
-    None
-
-    Returns:
-    int: Exit status (0 for success, 1 for failure).
-*/
-int main() {
-    string inputFileName = "input.xml";
-    string outputFileName = "output.xml";
-
-    string xmlContent = readXMLFile(inputFileName);
-    if (xmlContent.empty()) {
-        return 1;
-    }
-
-    string minifiedContent = minifyXML(xmlContent);
-
-    writeXMLToFile(outputFileName, minifiedContent);
-
-    return 0;
-}
