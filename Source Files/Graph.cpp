@@ -1,5 +1,5 @@
 #include "../Header Files/Graph.h" // Adjust path to include the header
-
+map<string, int> global_map;
 
 void NetworkAnalysis(map<string, vector<string>>& users, vector<string> data) {
     string currentUserId = "";       // To store the current user's ID
