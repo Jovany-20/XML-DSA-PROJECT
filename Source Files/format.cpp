@@ -120,7 +120,7 @@ indentation depending on the level of the node using recursion*/
     if (!node) {  return ""; }
     string outFile = "";
     // Print the current node value with indentation
-    if(size(node->pointers))
+    if(node->pointers.size())
     outFile += string(depth * 4, ' ') + "<" + node->val +">" + "\n";
     else {
         stringstream ss(formatWithTabsAndWordWrap(node->val, 40));
@@ -135,7 +135,7 @@ indentation depending on the level of the node using recursion*/
     for (Tree* child : node->pointers) {
         outFile+= formatXML(child, depth + 1);
     }
-    if (size(node->pointers)) outFile += string(depth * 4, ' ') + "</" + node->val + ">" + "\n";
+    if (node->pointers.size()) outFile += string(depth * 4, ' ') + "</" + node->val + ">" + "\n";
     return outFile;
 }
 
@@ -162,7 +162,7 @@ string formatWithTabsAndWordWrap(const string& str, size_t width) {
         else {
             // Add the word to the current line
             if (currentLine != "\t") {
-               if(size(currentLine))  currentLine += " "; // Add a space between words
+               if(currentLine.size())  currentLine += " "; // Add a space between words
                 
             }
             currentLine += word;
