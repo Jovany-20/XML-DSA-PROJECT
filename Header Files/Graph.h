@@ -15,7 +15,7 @@ using namespace std;
 // Map to store the user ID , 
 //this will get filled by visulize function (will call NetworkAnalysis)
 //and rest of tasks will only use this map drectly yo save memory.
-extern map<string, int> global_map; 
+extern map<string, vector<string>> global_map; 
 
 // Function declarations
 // the visulize function will call this function to fill the global map 
