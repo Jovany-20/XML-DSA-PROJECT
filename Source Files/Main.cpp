@@ -9,8 +9,20 @@
 #include "../Header Files/Tree.h"
 #include "../Header Files/XML_Fix.h"
 #include "../Header Files/XML_Validator.h"
+#include "../Header Files/mutual_followers.h"
+#include "../Header Files/xmltojson.h"
 
 using namespace std;
+
+void printUsers(const map<string, vector<string>>& users) {
+    for (const auto& pair : users) {
+        cout << "User ID: " << pair.first << "\nFollowers: ";
+        for (const auto& follower : pair.second) {
+            cout << follower << " ";
+        }
+        cout << "\n\n";
+    }
+}
 
 void showUsage() {
     cout << "Usage: xml_editor <command> -i <input_file> [options]\n";
@@ -64,29 +76,53 @@ int main(int argc, char* argv[]) {
             isValid = ValidateXML(xmlData);
             cout << "XML is fixed\n";
         }
+
     } else if (command == "format") {
         // Format (prettify) XML
         string formattedXML = format(xmlData);
         cout << formattedXML;
+
     } else if (command == "json") {
-        // Convert XML to JSON
-        cout << "JSON conversion is not implemented yet.\n";
+        cout <<"json start";
+        // Clean and process XML
+        string cleanedXML = RemoveSpaces(xmlData);
+        string jsonOutput = convertXMLToJSON(cleanedXML);
+
+        // Output JSON
+        cout << jsonOutput << endl;
+        //save output to file
+        ofstream jsonFile("output_file.json");
+        jsonFile << jsonOutput;
+        jsonFile.close();
+
+
     } else if (command == "mini") {
         // Minify XML
         cout << "Minification is not implemented yet.\n";
+
+
     } else if (command == "compress") {
         // Compress XML
         cout << "Compression is not implemented yet.\n";
+
+
     } else if (command == "decompress") {
         // Decompress XML
         cout << "Decompression is not implemented yet.\n";
+
+
     } else if (command == "draw") {
         // Represent XML in graph
         cout << "Graph visualization is not implemented yet.\n";
+
+
     } else if (command == "most_active") {
         // Find the most active user
         cout << "Most active user logic is not implemented yet.\n";
+
+
     } else if (command == "most_influencer") {
+
         // Find the most influencer user
         map<string, vector<string>> users;
         vector<string> parsedXML = parseXML(xmlData);
@@ -97,12 +133,16 @@ int main(int argc, char* argv[]) {
             cout << user << " ";
         }
         cout << endl;
+
     } else if (command == "mutual") {
-        // Find mutual followers between users
-        cout << "Mutual followers logic is not implemented yet.\n";
+        
+
+
+
     } else if (command == "suggest") {
         // Suggest users to follow
         cout << "User suggestions logic is not implemented yet.\n";
+
     } else if (command == "search") {
         // Search posts by word or topic
         cout << "Post search logic is not implemented yet.\n";
