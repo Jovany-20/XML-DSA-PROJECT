@@ -1,4 +1,4 @@
-#include "decompression.h"
+#include  "../Header Files/decompression.h"
 
 bool decodeFromFile(const std::string& fileName) {
     /*
