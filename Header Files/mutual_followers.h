@@ -1,14 +1,12 @@
 #ifndef MUTUALFOLLOWERS_H
 #define MUTUALFOLLOWERS_H
 
-
 #include<iostream>
 #include<string>
 #include<stack>
 #include <vector>
 #include<map>
 #include <algorithm>
-
 
 #include "Graph.h" // Include the Graph class header
 
