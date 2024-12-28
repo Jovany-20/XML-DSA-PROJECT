@@ -11,6 +11,8 @@
 #include "../Header Files/XML_Validator.h"
 #include "../Header Files/mutual_followers.h"
 #include "../Header Files/xmltojson.h"
+#include  "../Header Files/compression.h"
+#include "../Header Files/decompression.h"
 
 using namespace std;
 
@@ -103,15 +105,21 @@ int main(int argc, char* argv[]) {
 
     } else if (command == "compress") {
         // Compress XML
-        cout << "Compression is not implemented yet.\n";
-
+        string fileName = "input_file.comp";
+        if (!encodeAndSave(xmlData, fileName)) {
+        cerr << "Encoding failed!" << endl;
+       
+    }
 
     } else if (command == "decompress") {
-        // Decompress XML
-        cout << "Decompression is not implemented yet.\n";
+        // // Decompress XML
+        string fileName = "encoded_data.lzw";
+        // if (!decodeFromFile(fileName)) {
+        // cerr << "Decoding failed!" << endl;
+       
+    }
 
-
-    } else if (command == "draw") {
+    else if (command == "draw") {
         // Represent XML in graph
         cout << "Graph visualization is not implemented yet.\n";
 
