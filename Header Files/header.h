@@ -17,5 +17,6 @@
 #include  "../Header Files/compression.h"
 #include "../Header Files/decompression.h"
 #include "../Header Files/mostActiveUser.h"
+#include "../Header Files/SuggestUsers_H.h"
 
 #endif
