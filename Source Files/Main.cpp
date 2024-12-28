@@ -1,19 +1,5 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <map>
-#include <vector>
-#include "../Header Files/format.h"
-#include "../Header Files/Graph.h"
-#include "../Header Files/Most_followers.h"
-#include "../Header Files/Tree.h"
-#include "../Header Files/XML_Fix.h"
-#include "../Header Files/XML_Validator.h"
-#include "../Header Files/mutual_followers.h"
-#include "../Header Files/xmltojson.h"
-#include  "../Header Files/compression.h"
-#include "../Header Files/decompression.h"
-#include "../Header Files/mostActiveUser.h"
+#include "../Header Files/header.h"
+
 using namespace std;
 
 void printUsers(const map<string, vector<string>>& users) {
@@ -125,7 +111,7 @@ int main(int argc, char* argv[]) {
 
 
     } else if (command == "most_active") {
-        
+        // Find the most active user
         map<string, vector<string>> users;
         vector<string> parsedXML = parseXML(xmlData);
         NetworkAnalysis(users, parsedXML);
@@ -144,6 +130,7 @@ int main(int argc, char* argv[]) {
         map<string, vector<string>> users;
         vector<string> parsedXML = parseXML(xmlData);
         NetworkAnalysis(users, parsedXML);
+        printUsers(users);
         vector<string> mostInfluencers = mostFollowers(users);
         cout << "Most Influencer User(s): ";
         for (const auto& user : mostInfluencers) {
@@ -168,11 +155,7 @@ int main(int argc, char* argv[]) {
             cout<<userIds[i]<<" ";
 
         }
-
         cout <<"is " << result << endl;
-        // cout << "Mutual followers between User " << firstUser << " and User " << secondUser << ": " << mutual << endl;
-
-
 
     } else if (command == "suggest") {
         // Suggest users to follow
