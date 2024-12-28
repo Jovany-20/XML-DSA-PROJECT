@@ -100,8 +100,8 @@ int main(int argc, char* argv[]) {
 
     } else if (command == "mini") {
         // Minify XML
-        cout << "Minification is not implemented yet.\n";
-
+        string minifiedXML = RemoveSpaces(xmlData);
+        cout << minifiedXML;
 
     } else if (command == "compress") {
         // Compress XML

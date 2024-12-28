@@ -33,26 +33,6 @@ string minifyXML(const string& xmlContent) {
     return minifiedContent;
 }
 
-/*
-    This function reads the content of an XML file into a string.
-
-    Parameters:
-    fileName (const string&): The name of the file to be read.
-
-    Returns:
-    string: The content of the file as a string.
-*/
-string readXMLFile(const string& fileName) {
-    ifstream inFile(fileName);
-    if (!inFile) {
-        cerr << "Error: Unable to open input file: " << fileName << endl;
-        return "";
-    }
-
-    ostringstream buffer;
-    buffer << inFile.rdbuf();
-    return buffer.str();
-}
 
 /*
     This function writes the minified XML content to an output file.
