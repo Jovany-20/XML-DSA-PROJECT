@@ -158,8 +158,26 @@ int main(int argc, char* argv[]) {
         cout <<"is " << result << endl;
 
     } else if (command == "suggest") {
-        // Suggest users to follow
-        cout << "User suggestions logic is not implemented yet.\n";
+        map<string, vector<string>> users;
+        vector<string> parsedXML = parseXML(xmlData);
+        NetworkAnalysis(users, parsedXML);
+        printUsers(users);
+        string firstUser = "2";
+        string secondUser = "3";
+        vector<string> userIds = {"1", "2", "3","4"};
+
+        for(int i =0 ; i<userIds.size();i++)
+        {
+            cout<<"User ID : "<<userIds[i]<<" suggested: ";
+            vector <string> suggested = suggestUsersToFollow(users, userIds[i]);
+            for(int j =0 ; j < suggested.size() ; j++)
+        {
+            cout << suggested[j] << ", ";
+
+        }
+        cout << endl;
+
+    }
         
     } else if (command == "search") {
         // Search posts by word or topic

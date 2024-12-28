@@ -1,4 +1,4 @@
-#include "../Header Files/SuggestUser_H.h"
+#include "../Header Files/SuggestUsers_H.h"
 
 vector<string> suggestUsersToFollow(map<string, vector<string>> users, string userId) {
 

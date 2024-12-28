@@ -7,7 +7,8 @@ using namespace std;
 #include<string>
 #include <vector>
 #include <set>
-
+#include <map>
+#include "Graph.h"
 
 
 vector<string> suggestUsersToFollow(map<string, vector<string>> users, string userId);
