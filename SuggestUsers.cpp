@@ -1,5 +1,20 @@
+/* 
+    -SuggestUsersToFollow Function :
+         -inputs : hashmap users "the network graph that contains the users and their connections to each others"
+                   String UserId argument that specifies which user in the graph or the hashmap that we want to find his suggested users 
 
+        -How the function works ?
+        it iterates over the hashmap/graph ->first iterator : the key (every single user , string users) and see his following users in 
+        the ->second iterator : the value (vector<string> users)
+        compare if their is any mutual connection between userId and the user in otherUserId  
+        if any mutual connection found then this otherUserId will be pushed to set<string>suggestions as a suggested user.
+
+        -Output : vector<string> suggested users that contains all the suggested user to the given user in the arguments userId
+*/
 vector<string> suggestUsersToFollow(map<string, vector<string>> users, string userId) {
+    
+
+    
 
     if (users.find(userId) == users.end()) {
         return {}; // User does not exist, return an empty list
