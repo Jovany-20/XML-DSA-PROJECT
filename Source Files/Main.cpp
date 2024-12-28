@@ -135,14 +135,32 @@ int main(int argc, char* argv[]) {
         cout << endl;
 
     } else if (command == "mutual") {
-        
+        // Find mutual followers between users
+        map<string, vector<string>> users;
+        vector<string> parsedXML = parseXML(xmlData);
+        NetworkAnalysis(users, parsedXML);
+        printUsers(users);
+        string firstUser = "2";
+        string secondUser = "3";
+        vector<string> userIds = {"1", "2", "3"};
+
+        string result = mutualFollowersBetween_n_Users(users, userIds);
+        cout << "Mutual followers between Users:";
+        for(int i =0 ; i<userIds.size();i++)
+        {
+            cout<<userIds[i]<<" ";
+
+        }
+
+        cout <<"is " << result << endl;
+        // cout << "Mutual followers between User " << firstUser << " and User " << secondUser << ": " << mutual << endl;
 
 
 
     } else if (command == "suggest") {
         // Suggest users to follow
         cout << "User suggestions logic is not implemented yet.\n";
-
+        
     } else if (command == "search") {
         // Search posts by word or topic
         cout << "Post search logic is not implemented yet.\n";
