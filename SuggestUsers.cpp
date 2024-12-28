@@ -1,4 +1,7 @@
-/* 
+
+vector<string> suggestUsersToFollow(map<string, vector<string>> users, string userId) {
+    
+    /* 
     -SuggestUsersToFollow Function :
 
          This function is used to find the suggested user to a specific user by finding the mutual connections between them,
@@ -10,10 +13,7 @@
 
         
         -Returns : vector<string> suggested users
-*/
-vector<string> suggestUsersToFollow(map<string, vector<string>> users, string userId) {
-    
-
+    */
     
 
     if (users.find(userId) == users.end()) {
