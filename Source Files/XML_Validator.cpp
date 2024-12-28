@@ -1,4 +1,4 @@
-#include "..\Header Files\XML_Validor.h"
+#include "..\Header Files\XML_Validator.h"
 
 vector<int> tokensLines;
 vector<int> tokensIndex;
