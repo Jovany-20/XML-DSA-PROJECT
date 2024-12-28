@@ -27,6 +27,6 @@ using namespace std;
          - A string containing the IDs of the mutual followers separated by spaces. If there are no mutual followers,
            it returns "None". If there are fewer than two users in the userIds vector, it returns "Not enough users to compare."
 */
-string mutualFollowersBetween_n_Users(map<string, vector<string>> users, vector<string> userIds)
+string mutualFollowersBetween_n_Users(map<string, vector<string>> users, vector<string> userIds);
 
 #endif
