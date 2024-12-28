@@ -1,6 +1,18 @@
 #include "mainwindow.h"
+
+
 #include "./ui_mainwindow.h"
 #include "XML_Validor.h"
+#include "XML_Fix.h"
+#include "format.h"
+#include "xmltojson.h"
+#include "decompression.h"
+#include "compression.h"
+#include "Graph.h"
+#include "mostActiveUser.h"
+#include "Most_followers.h"
+
+
 #include <QFileDialog> // for browse button
 #include <QString>
 #include <string>
@@ -20,6 +32,10 @@
 using namespace std;
 QString inputQstring  ;
 string inputString ;
+string prcessingString ;
+
+map<string, vector<string>> users;
+vector<string> parsedXML ;
 
 
 void browseAndLoadFile(QPlainTextEdit* plainTextEdit) {
@@ -121,36 +137,30 @@ void dehighlightAll(QPlainTextEdit *editor) {
     cursor.mergeCharFormat(format);
 }
 
-
-
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
+    : QMainWindow(parent),
+    ui(new Ui::MainWindow)  // Initialize the ui pointer
 {
-    ui->setupUi(this);
+    ui->setupUi(this);  // Setup the UI
 
-     inputQstring = ui->inputArea->toPlainText() ;
-     inputString = inputQstring.toStdString();
+    // Now you can access the UI elements
+    inputQstring = ui->inputArea->toPlainText();  // Get the text from inputArea
+    inputString = inputQstring.toStdString();     // Convert it to std::string
 }
 
 MainWindow::~MainWindow()
 {
-    delete ui;
+    delete ui;  // Clean up the ui pointer
 }
-
 void MainWindow::on_pushButton_4_clicked()
 {
-    ui->outputArea->setPlainText(" pretifiy output here");
-
+ui->outputArea->setPlainText(QString::fromStdString(format(prcessingString)));
 }
 
 
 void MainWindow::on_checkValidationButton_clicked()
 {
-    bool value = ValidateXML(inputString) ;
-    QString text1 = value ? "true" : "false";
 
-    ui->outputArea->setPlainText( text1  );
 
     dehighlightAll(ui->inputArea);
     highlightLines(ui->inputArea, errors_locations);
@@ -166,14 +176,16 @@ void MainWindow::on_minifyButton_clicked()
 
 void MainWindow::on_compressButton_clicked()
 {
-    ui->outputArea->setPlainText(" compress  output ");
-
+    string fileName = "gerrminCodeFile";
+    string a3redElCompression = "";
+    encodeAndSave(inputString, fileName ,a3redElCompression ) ;
+    ui->outputArea->setPlainText(QString::fromStdString(a3redElCompression));
 }
 
 
 void MainWindow::on_convertToJSONButton_clicked()
 {
-
+ui->outputArea->setPlainText(QString::fromStdString(convertXMLToJSON(prcessingString)));
 }
 
 
@@ -187,5 +199,142 @@ void MainWindow::on_inputArea_textChanged()
 {
     inputQstring = ui->inputArea->toPlainText() ;
     inputString = inputQstring.toStdString();
+    prcessingString= inputString ;
+}
+
+
+
+
+
+void MainWindow::on_pushButton_3_clicked()
+{
+    //fix_missing_close_tag(inputString) ;
+    ui->outputArea->setPlainText(QString::fromStdString(fix_missing_close_tag(prcessingString)));
+    // ui->outputArea->setPlainText(QString::fromStdString(fix_missing_open_tag(inputString)));
+
+}
+
+
+void MainWindow::on_outputArea_textChanged()
+{
+
+    prcessingString=  ui->outputArea->toPlainText().toStdString() ;
+}
+
+
+void MainWindow::on_decompressButton_clicked()
+{
+
+    string fileName = "gerrminCodeFile";
+    string a3redElDecompression = "";
+    decodeFromFile(inputString, a3redElDecompression  ) ;
+    ui->outputArea->setPlainText(QString::fromStdString(a3redElDecompression));
+
+}
+
+
+void MainWindow::on_searchButton_clicked()
+{
+
+    struct TextPosition {
+        int linepos;
+        int lineIndex;
+    };
+
+        ui->inputArea->setPlainText(ui->inputArea->toPlainText());
+    string text =   inputString ;      //ui->widget->toPlainText().toStdString();
+        string targetText = ui->searchKeyword->toPlainText().toStdString(); //searchKeyword
+        vector<string>lines;
+        stringstream ss(text);
+        string line;
+        vector<TextPosition> lineIndex;
+
+        if (text.compare("") != 0)
+        {
+            while(std::getline(ss,line,'\n')){
+                lines.push_back(line);
+            }
+        }
+        else
+            return;
+
+        if(targetText.compare("") == 0)
+        {
+            QMessageBox::warning(this, "title", "Enter text to search for");
+            return;
+        }
+
+        for(int i = 0;i < (int) lines.size(); i++)
+        {
+            size_t found = lines[i].find(targetText);
+            if(found != string::npos)
+            {
+                lineIndex.push_back({(int)found, i});
+            }
+        }
+
+        QTextCharFormat  fmt;
+        fmt.setProperty(QTextFormat::FullWidthSelection, true);
+        fmt.setBackground(Qt::green);
+        ui->inputArea->setLineWrapMode(QPlainTextEdit::NoWrap);
+
+        for(int i = 0; i < (int) lineIndex.size();i++)
+        {
+
+            QTextCursor cursor = ui->inputArea->textCursor();
+            cursor.movePosition(QTextCursor::Start);
+            cursor.movePosition(QTextCursor::Down, QTextCursor::MoveAnchor, lineIndex[i].lineIndex);
+            cursor.movePosition(QTextCursor::Right, QTextCursor::MoveAnchor, lineIndex[i].linepos);
+            cursor.movePosition(QTextCursor::Right, QTextCursor::MoveAnchor, (int)targetText.size());
+            cursor.select(QTextCursor::LineUnderCursor);
+            cursor.setCharFormat(fmt);
+
+            //ui->widget->setTextCursor(cursor);
+
+        }
+
+
+}
+
+
+void MainWindow::on_sartVisualizationButton_clicked()
+{
+
+
+
+}
+
+
+void MainWindow::on_mostActiveUserButton_clicked()
+{
+    parsedXML = parseXML(inputString);
+    NetworkAnalysis(users, parsedXML);
+    vector<string> result = mostActiveUser(users);
+
+    QString message = "The most active user(s) is/are:\n";
+    for (const auto& user : result) {
+        message += "user " + QString::fromStdString(user) + "\n"; // Add each user and a newline
+    }
+
+    // Display the message in a message box
+    QMessageBox::information(this, "Most Active Users", message);
+
+
+}
+
+
+void MainWindow::on_mostActiveUserButton_2_clicked()
+{
+    parsedXML = parseXML(inputString);
+    NetworkAnalysis(users, parsedXML);
+    vector<string> result = mostFollowers(users);
+
+    QString message = "the most user(s) that got followers is/are:\n";
+    for (const auto& user : result) {
+        message += "user " + QString::fromStdString(user) + "\n"; // Add each user and a newline
+    }
+
+    // Display the message in a message box
+    QMessageBox::information(this, "Most Active Users", message);
 }
 

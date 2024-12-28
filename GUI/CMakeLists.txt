@@ -18,13 +18,34 @@ set(PROJECT_SOURCES
         mainwindow.h
         mainwindow.ui
 	XML_Validator.cpp
-	XML_Validor.h
+        XML_Validor.h
+        XML_Fix.cpp
+        XML_Fix.h
+        format.h
+        format.cpp
+        Tree.h
+	xmltojson.h
+	xmltojson.cpp
+        decompression.h
+        decompression.cpp
+        compression.h
+        compression.cpp
+        Graph.h
+        Graph.cpp
+        mostActiveUser.h
+        mostActiveUser.cpp
+        #mutual_followers.h
+        #mutual_followers.cpp
+        Most_followers.h
+        Most_followers.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(myFirstApplication
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET myFirstApplication APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

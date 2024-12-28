@@ -1,4 +1,4 @@
-#include "../Header Files/XML_Fix.h"
+#include "XML_Fix.h"
 #include <stack>
 
 std::string fix_missing_close_tag(const std::string& input) {
