@@ -1,4 +1,4 @@
-#include "compression.h"
+#include  "../Header Files/compression.h"
 
 bool encodeAndSave(const std::string& input, const std::string& fileName) {
     /*
