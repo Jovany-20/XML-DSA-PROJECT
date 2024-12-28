@@ -13,7 +13,7 @@
 #include "../Header Files/xmltojson.h"
 #include  "../Header Files/compression.h"
 #include "../Header Files/decompression.h"
-
+#include "../Header Files/mostActiveUser.h"
 using namespace std;
 
 void printUsers(const map<string, vector<string>>& users) {
@@ -121,12 +121,21 @@ int main(int argc, char* argv[]) {
 
     }else if (command == "draw") {
         // Represent XML in graph
-        cout << "Graph visualization is not implemented yet.\n";
+        cout << "Graph visualization is implemened in GUI.\n";
 
 
     } else if (command == "most_active") {
-        // Find the most active user
-        cout << "Most active user logic is not implemented yet.\n";
+        
+        map<string, vector<string>> users;
+        vector<string> parsedXML = parseXML(xmlData);
+        NetworkAnalysis(users, parsedXML);
+        printUsers(users);
+        vector<string> result = mostActiveUser(users);
+        cout << "Most Active User(s): ";
+        for (const auto& user : result) {
+            cout << user << " ";
+        }
+         cout << "\n\n";
 
 
     } else if (command == "most_influencer") {
@@ -171,7 +180,7 @@ int main(int argc, char* argv[]) {
         
     } else if (command == "search") {
         // Search posts by word or topic
-        cout << "Post search logic is not implemented yet.\n";
+        cout << "Post search logic is implemented in GUI.\n";
     } else {
         cerr << "Error: Unknown command '" << command << "'.\n";
         showUsage();
