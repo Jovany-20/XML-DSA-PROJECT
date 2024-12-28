@@ -105,7 +105,7 @@ int main(int argc, char* argv[]) {
 
     } else if (command == "compress") {
         // Compress XML
-        string fileName = "input_file.comp";
+        string fileName = "output_file.comp";
         if (!encodeAndSave(xmlData, fileName)) {
         cerr << "Encoding failed!" << endl;
        
@@ -113,13 +113,13 @@ int main(int argc, char* argv[]) {
 
     } else if (command == "decompress") {
         // // Decompress XML
-        string fileName = "encoded_data.lzw";
-        // if (!decodeFromFile(fileName)) {
-        // cerr << "Decoding failed!" << endl;
+        string fileName = "output_file.comp";
+        if (!decodeFromFile(fileName)) {
+        cerr << "Decoding failed!" << endl;
        
     }
 
-    else if (command == "draw") {
+    }else if (command == "draw") {
         // Represent XML in graph
         cout << "Graph visualization is not implemented yet.\n";
 
@@ -179,4 +179,5 @@ int main(int argc, char* argv[]) {
     }
 
     return 0;
+    
 }

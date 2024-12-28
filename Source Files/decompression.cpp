@@ -65,5 +65,5 @@ bool: Returns true if decoding is successful, otherwise returns false.
         old_code = new_code;
     }
 
-    return true;
+  return true;
 }
