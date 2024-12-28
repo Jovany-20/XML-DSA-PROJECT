@@ -33,7 +33,6 @@ string minifyXML(const string& xmlContent) {
     return minifiedContent;
 }
 
-
 /*
     This function writes the minified XML content to an output file.
 
