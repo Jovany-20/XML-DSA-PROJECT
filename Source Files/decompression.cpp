@@ -1,11 +1,12 @@
 #include  "../Header Files/decompression.h"
 
-bool decodeFromFile(const std::string& fileName) {
+bool decodeFromFile(const std::string& fileName, const std::string& outputFile) {
     /*
 This Function is used to decode a file using LZW compression algorithm.
 
 Parameters:
 fileName (const std::string&): The name of the file to be decoded.
+outputFile (const std::string&): The name of the file to save the decoded data.
 
 Returns:
 bool: Returns true if decoding is successful, otherwise returns false.
@@ -64,6 +65,13 @@ bool: Returns true if decoding is successful, otherwise returns false.
         dictionary[code_index++] = dictionary[old_code] + character;
         old_code = new_code;
     }
-
+    // Write the decoded data to the output file
+    std::ofstream outFile(outputFile);
+    if (!outFile) {
+        std::cerr << "Error opening file for writing: " << outputFile << std::endl;
+        return false;
+    }  
+    outFile << result;
+    outFile.close();
   return true;
 }

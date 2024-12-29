@@ -52,13 +52,14 @@ int main(int argc, char* argv[]) {
         } else if (arg == "-t" && i + 1 < argc) {
             topic = argv[++i];
         } else if (arg == "-ids" && i + 1 < argc) {
-            string idsArg = argv[++i];
-            stringstream ss(idsArg);
-            string token;
-            while (getline(ss, token, ',')) {
-                userIds.push_back(token);
+            while (i + 1 < argc && argv[i + 1][0] != '-') {
+              userIds.push_back(argv[++i]);  // Add each ID with spaces between them
             }
-        } else {
+        }else if(arg == "-id" && i + 1 < argc) {
+            userIds.push_back(argv[++i]);  // Directly add single user ID
+        }
+        
+        else {
             cerr << "Error: Unknown or incomplete option '" << arg << "'.\n";
             showUsage();
             return 1;
@@ -109,38 +110,51 @@ int main(int argc, char* argv[]) {
     else if (command == "json") {
         string cleanedXML = RemoveSpaces(xmlData);
         string jsonOutput = convertXMLToJSON(cleanedXML);
-
-        if (!outputFile.empty()) {
-            ofstream jsonFile(outputFile);
-            jsonFile << jsonOutput;
-            jsonFile.close();
-        } else {
-            cout << jsonOutput << endl;
-        }
+        cout << jsonOutput << endl;
+        
+        ofstream jsonFile(outputFile);
+        jsonFile << jsonOutput;
+        jsonFile.close();
+        
+            
+    
     }
     else if (command == "mini") {
         string minifiedXML = RemoveSpaces(xmlData);
-        if (!outputFile.empty()) {
-            ofstream minifiedFile(outputFile);
-            minifiedFile << minifiedXML;
-            minifiedFile.close();
-        } else {
-            cout << minifiedXML;
-        }
+        
+        ofstream minifiedFile(outputFile);
+        minifiedFile << minifiedXML;
+        minifiedFile.close();
+        
+        cout << minifiedXML;
+        
     }
     else if (command == "compress") {
-        string fileName = !outputFile.empty() ? outputFile : "output_file.comp";
+        string fileName = outputFile;
         if (!encodeAndSave(xmlData, fileName)) {
             cerr << "Encoding failed!" << endl;
         }
     }
     else if (command == "decompress") {
-        string fileName = !outputFile.empty() ? outputFile : "output_file.comp";
-        if (!decodeFromFile(fileName)) {
+        string fileName = inputFile;
+        if (!decodeFromFile(fileName, outputFile)) {
             cerr << "Decoding failed!" << endl;
         }
-    }
-    else if (command == "draw") {
+
+    }else if (command == "most_active") {
+        // Find the most active user
+        map<string, vector<string>> users;
+        vector<string> parsedXML = parseXML(xmlData);
+        NetworkAnalysis(users, parsedXML);
+        printUsers(users);
+        vector<string> result = mostActiveUser(users);
+        cout << "Most Active User(s): ";
+        for (const auto& user : result) {
+            cout << user << " ";
+        }
+        cout << "\n\n";
+        
+    }else if (command == "draw") {
         cout << "Graph visualization is implemented in GUI.\n";
     }
     else if (command == "most_influencer") {
@@ -172,8 +186,28 @@ int main(int argc, char* argv[]) {
             cout << id << " ";
         }
         cout << "are " << result << endl;
-    }
-    else if (command == "search") {
+    }else if (command == "suggest") {
+            map<string, vector<string>> users;
+            vector<string> parsedXML = parseXML(xmlData);
+            NetworkAnalysis(users, parsedXML);
+            printUsers(users);
+            string firstUser = "2";
+            string secondUser = "3";
+            if (userIds.size() != 1) {
+            cerr << "Error: Exactly one user ID must be specified with the -id option.\n";
+                 return 1;
+            }
+
+            string userId = userIds[0];  // Use the single user ID passed with -id
+            cout << "User ID: " << userId << " suggested: ";
+            vector<string> suggested = suggestUsersToFollow(users, userId);
+
+            for (const auto& suggestion : suggested) {
+                cout << suggestion << ", ";
+            }
+            cout << endl;
+
+        }else if (command == "search") {
         if (!word.empty()) {
             string wordResult = searchWord(word, xmlData);
             cout << "Search results for word '" << word << "':\n" << wordResult << endl;

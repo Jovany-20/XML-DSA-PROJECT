@@ -8,6 +8,6 @@
 #include <fstream>
 
 // Function to decode a list of codes using LZW algorithm
-bool decodeFromFile(const std::string& fileName);
+bool decodeFromFile(const std::string& fileName, const std::string& outputFile);
 
 #endif 
