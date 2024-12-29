@@ -1,4 +1,6 @@
 #include "mainwindow.h"
+//#include "mainwindow2.h"
+#include "grapwindow.h"  // Include the new GraphWindow class
 
 
 #include "./ui_mainwindow.h"
@@ -11,6 +13,7 @@
 #include "Graph.h"
 #include "mostActiveUser.h"
 #include "Most_followers.h"
+#include "minifying.h"
 
 
 #include <QFileDialog> // for browse button
@@ -169,7 +172,7 @@ void MainWindow::on_checkValidationButton_clicked()
 
 void MainWindow::on_minifyButton_clicked()
 {
-    ui->outputArea->setPlainText(" minify  output ");
+    ui->outputArea->setPlainText(QString::fromStdString(minifyXML(prcessingString)));
 
 }
 
@@ -301,6 +304,28 @@ void MainWindow::on_sartVisualizationButton_clicked()
 {
 
 
+    // Pass the data to the GraphWindow
+    std::map<std::string, std::vector<std::string>> users;
+    parsedXML = parseXML(inputString);
+    NetworkAnalysis(users, parsedXML);
+    // Populate 'users' with your actual data
+    GrapWindow* graphWindow = new GrapWindow(users, this);
+    graphWindow->exec();  // Show the graph in a modal window
+
+
+    /*
+    std::vector<std::string> tokens = parseXML(xmlData);
+    std::map<std::string, std::vector<std::string>> users;
+    NetworkAnalysis(users, tokens);
+*/
+   /* MainWindow2 mainWindow2;
+    mainWindow2.drawGraph(users);
+    mainWindow2.show();
+    */
+    /*
+    MainWindow2* mainWindow2 = new MainWindow2;  // Pass users to the constructor
+    mainWindow2->show();  // Now show the window after it's ready
+    */
 
 }
 

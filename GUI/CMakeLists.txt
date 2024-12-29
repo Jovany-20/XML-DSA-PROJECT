@@ -38,12 +38,18 @@ set(PROJECT_SOURCES
         #mutual_followers.cpp
         Most_followers.h
         Most_followers.cpp
+        minifying.h
+        minifying.cpp
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(myFirstApplication
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        grapwindow.h grapwindow.cpp grapwindow.ui
+
+
+
 
 
     )
