@@ -66,7 +66,7 @@ The following is a comprehensive list of commands available in the XML Editor an
 ## **Support**
 
 If you encounter any issues or have questions about this project:  
-1. **Raise an Issue**: Create an issue in the [GitHub repository](https://github.com/your-repository-url/issues).  
+1. **Raise an Issue**: Create an issue in the [GitHub repository](https://github.com/Jovany-20/XML-DSA-PROJECT/issues).  
 3. **Explore Discussions**: Join discussions and check FAQs in the repository's Discussions tab.
 
 Your feedback and suggestions are always welcome! 😊
