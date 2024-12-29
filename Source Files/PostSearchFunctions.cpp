@@ -5,6 +5,19 @@
 using namespace std;
 
 string searchWord(const string& word, const string& input) {
+    /*
+    This function is used to search for a specific word inside the body content of an XML string.
+    It uses regular expressions to extract the contents inside `<body>` tags and checks if the 
+    specified word is present in any of the `<body>` sections.
+
+    Parameters:
+    word (const std::string&): The word to search for in the body content.
+    input (const std::string&): The XML string containing the `<body>` sections.
+
+    Returns:
+    std::string: A result string containing all the body sections where the word is found.
+                 If no matches are found, it returns "No matches found."
+*/
     string result;
     regex bodyRegex(R"(<body[^>]*>([\s\S]*?)</body>)", regex::icase);
     smatch match;
