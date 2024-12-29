@@ -14,6 +14,7 @@
 #include "mostActiveUser.h"
 #include "Most_followers.h"
 #include "minifying.h"
+#include "mutual_followers.h"
 
 
 #include <QFileDialog> // for browse button
@@ -39,6 +40,8 @@ string prcessingString ;
 
 map<string, vector<string>> users;
 vector<string> parsedXML ;
+
+
 
 
 void browseAndLoadFile(QPlainTextEdit* plainTextEdit) {
@@ -120,6 +123,45 @@ void highlightLines(QPlainTextEdit *editor, vector<int> &lines) {
 
 }
 
+void highlightLinesDEBUG(QPlainTextEdit *editor, vector<int> &lines) {
+    // Ensure the editor and lines vector are valid
+    if (!editor || lines.empty()) {
+        qDebug() << "Editor or lines are invalid!";
+        return;
+    }
+
+    QTextDocument *doc = editor->document();
+    int totalBlocks = doc->blockCount();
+    qDebug() << "Total blocks in document: " << totalBlocks;
+
+    for (int line : lines) {
+        int blockNumber = line - 1;  // Convert to 0-based index
+        qDebug() << "Highlighting line: " << line;
+
+        // Ensure the line number is valid
+        if (blockNumber < 0 || blockNumber >= totalBlocks) {
+            qDebug() << "Invalid line number: " << line;
+            continue;
+        }
+
+        QTextBlock block = doc->findBlockByNumber(blockNumber);
+        if (block.isValid()) {
+            QTextCursor cursor(block);
+
+            // Set up the text format
+            QTextCharFormat format;
+            format.setBackground(Qt::red);  // Highlight in red
+
+            // Select the block and apply the format
+            cursor.select(QTextCursor::LineUnderCursor);
+            cursor.mergeCharFormat(format);
+        } else {
+            qDebug() << "Invalid block for line: " << line;
+        }
+    }
+}
+
+
 void dehighlightAll(QPlainTextEdit *editor) {
     /*
      -function usage: dehiglight all the lines
@@ -144,7 +186,10 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
     ui(new Ui::MainWindow)  // Initialize the ui pointer
 {
+
+
     ui->setupUi(this);  // Setup the UI
+    setWallpaper(); // Call the function to set the wallpaper
 
     // Now you can access the UI elements
     inputQstring = ui->inputArea->toPlainText();  // Get the text from inputArea
@@ -155,6 +200,16 @@ MainWindow::~MainWindow()
 {
     delete ui;  // Clean up the ui pointer
 }
+
+void MainWindow::setWallpaper() {
+    // Set the background image using QPalette
+    QPalette palette;
+    QPixmap pixmap("D:/college/3. senior 1/2. Data strc & Alg/project/gui/my working area/myFirstApplication/icons/ii.jpg"); // Provide the path to your image
+    palette.setBrush(QPalette::Window, QBrush(pixmap));  // Use QPalette::Window instead of Background
+    setPalette(palette); // Apply the palette to the window
+}
+
+
 void MainWindow::on_pushButton_4_clicked()
 {
 ui->outputArea->setPlainText(QString::fromStdString(format(prcessingString)));
@@ -164,9 +219,15 @@ ui->outputArea->setPlainText(QString::fromStdString(format(prcessingString)));
 void MainWindow::on_checkValidationButton_clicked()
 {
 
-
     dehighlightAll(ui->inputArea);
-    highlightLines(ui->inputArea, errors_locations);
+    bool isValid =ValidateXML(inputString);
+    if (isValid) {
+        QMessageBox::information(this, "Validation", "The code is VALIDAT!");
+    } else {
+        QMessageBox::warning(this, "Validation", "There are errors in the code.");
+    }
+
+    highlightLinesDEBUG(ui->inputArea, errors_locations);
 }
 
 
@@ -203,6 +264,8 @@ void MainWindow::on_inputArea_textChanged()
     inputQstring = ui->inputArea->toPlainText() ;
     inputString = inputQstring.toStdString();
     prcessingString= inputString ;
+
+    ui->outputArea->clear() ;
 }
 
 
@@ -212,8 +275,8 @@ void MainWindow::on_inputArea_textChanged()
 void MainWindow::on_pushButton_3_clicked()
 {
     //fix_missing_close_tag(inputString) ;
-    ui->outputArea->setPlainText(QString::fromStdString(fix_missing_close_tag(prcessingString)));
-    // ui->outputArea->setPlainText(QString::fromStdString(fix_missing_open_tag(inputString)));
+    ui->outputArea->setPlainText(QString::fromStdString(fix_missing_close_tag(inputString)));
+    ui->outputArea->setPlainText(QString::fromStdString(fix_missing_open_tag(inputString)));
 
 }
 
@@ -228,7 +291,7 @@ void MainWindow::on_outputArea_textChanged()
 void MainWindow::on_decompressButton_clicked()
 {
 
-    string fileName = "gerrminCodeFile";
+
     string a3redElDecompression = "";
     decodeFromFile(inputString, a3redElDecompression  ) ;
     ui->outputArea->setPlainText(QString::fromStdString(a3redElDecompression));
@@ -361,5 +424,58 @@ void MainWindow::on_mostActiveUserButton_2_clicked()
 
     // Display the message in a message box
     QMessageBox::information(this, "Most Active Users", message);
+}
+
+
+void MainWindow::on_SaveButton_clicked()
+{
+    // Open a file dialog to choose where to save the file
+    QString fileName = QFileDialog::getSaveFileName(this, "Save File", "", "Text Files (*.txt);;All Files (*)");
+
+    // If the user cancels the dialog, do nothing
+    if (fileName.isEmpty()) {
+        return;
+    }
+
+    // Open the file for writing
+    QFile file(fileName);
+    if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        QMessageBox::warning(this, "Error", "Cannot save file: " + file.errorString());
+        return;
+    }
+
+    // Retrieve text from QPlainTextEdit (assuming it's named `outputArea`)
+    QString content = ui->outputArea->toPlainText();
+
+    // Write the text to the file
+    QTextStream out(&file);
+    out << content;
+
+    // Close the file
+    file.close();
+
+    // Optional: Show a confirmation message
+    QMessageBox::information(this, "Success", "File saved successfully!");
+}
+
+
+void MainWindow::on_pushButton_9_clicked()
+{
+    dehighlightAll(ui->inputArea);
+
+}
+
+
+void MainWindow::on_mutualFriendsButton_clicked()
+{
+    map<string, vector<string>> users;
+    vector<string> parsedXML = parseXML(inputString);
+    NetworkAnalysis(users, parsedXML);
+    string firstUser = "2";
+    string secondUser = "3";
+    vector<string> userIds = {"1", "2", "3"};
+    QString message = "users has user(s) \n" + QString::fromStdString(mutualFollowersBetween_n_Users(users, userIds)) + "\n as a mutual friend(s)";
+    // Display the message in a message box
+    QMessageBox::information(this, "mutual Friends", message);
 }
 

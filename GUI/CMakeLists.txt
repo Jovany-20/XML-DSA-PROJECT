@@ -34,8 +34,8 @@ set(PROJECT_SOURCES
         Graph.cpp
         mostActiveUser.h
         mostActiveUser.cpp
-        #mutual_followers.h
-        #mutual_followers.cpp
+        mutual_followers.h
+        mutual_followers.cpp
         Most_followers.h
         Most_followers.cpp
         minifying.h

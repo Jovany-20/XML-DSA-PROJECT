@@ -27,6 +27,9 @@
 #include <QTextDocument>
 #include <QTextBlock>
 #include <QPixmap>   // For setting custom icon
+#include <QMainWindow>
+#include <QPalette>
+
 
 
 QT_BEGIN_NAMESPACE
@@ -74,8 +77,18 @@ private slots:
 
     void on_mostActiveUserButton_2_clicked();
 
+    void on_SaveButton_clicked();
+
+    void on_pushButton_9_clicked();
+
+    void on_searchButton_2_clicked();
+
+    void on_mutualFriendsButton_clicked();
+
 private:
     Ui::MainWindow *ui;
+
+    void setWallpaper(); // Function declaration for setting wallpape
 };
 
 #endif // MAINWINDOW_H

@@ -1,4 +1,4 @@
-#include "../Header Files/mutual_followers.h"
+#include "mutual_followers.h"
 
 //  mutualFollowers function
 string mutualFollowersBetween_n_Users(map<string, vector<string>> users, vector<string> userIds) {
