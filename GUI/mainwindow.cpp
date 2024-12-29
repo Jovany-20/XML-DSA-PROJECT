@@ -44,6 +44,32 @@ vector<string> parsedXML ;
 
 
 
+
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent),
+    ui(new Ui::MainWindow)  // Initialize the ui pointer
+{
+
+
+    ui->setupUi(this);  // Setup the UI
+    setWallpaper(); // Call the function to set the wallpaper
+
+    // Now you can access the UI elements
+    inputQstring = ui->inputArea->toPlainText();  // Get the text from inputArea
+    inputString = inputQstring.toStdString();     // Convert it to std::string
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;  // Clean up the ui pointer
+}
+
+
+
+
+
+
+
 void browseAndLoadFile(QPlainTextEdit* plainTextEdit) {
     /*
      -function usage:  to open the explorer when BROWSE button is clicked
@@ -182,29 +208,12 @@ void dehighlightAll(QPlainTextEdit *editor) {
     cursor.mergeCharFormat(format);
 }
 
-MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent),
-    ui(new Ui::MainWindow)  // Initialize the ui pointer
-{
 
-
-    ui->setupUi(this);  // Setup the UI
-    setWallpaper(); // Call the function to set the wallpaper
-
-    // Now you can access the UI elements
-    inputQstring = ui->inputArea->toPlainText();  // Get the text from inputArea
-    inputString = inputQstring.toStdString();     // Convert it to std::string
-}
-
-MainWindow::~MainWindow()
-{
-    delete ui;  // Clean up the ui pointer
-}
 
 void MainWindow::setWallpaper() {
     // Set the background image using QPalette
     QPalette palette;
-    QPixmap pixmap("D:/college/3. senior 1/2. Data strc & Alg/project/gui/my working area/myFirstApplication/icons/ii.jpg"); // Provide the path to your image
+    QPixmap pixmap("icons/ii.jpg"); // Provide the path to your image
     palette.setBrush(QPalette::Window, QBrush(pixmap));  // Use QPalette::Window instead of Background
     setPalette(palette); // Apply the palette to the window
 }
@@ -240,7 +249,7 @@ void MainWindow::on_minifyButton_clicked()
 
 void MainWindow::on_compressButton_clicked()
 {
-    string fileName = "gerrminCodeFile";
+    string fileName = "compressCodeFile";
     string a3redElCompression = "";
     encodeAndSave(inputString, fileName ,a3redElCompression ) ;
     ui->outputArea->setPlainText(QString::fromStdString(a3redElCompression));
