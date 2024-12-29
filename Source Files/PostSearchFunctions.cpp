@@ -1,4 +1,4 @@
-#include "../Header Files/SearchFunctions.h"
+#include "../Header Files/PostSearchFunctions.h"
 #include <regex>
 #include <sstream>
 
@@ -74,3 +74,4 @@ string searchTopic(const string& topic, const string& input) {
 
     return found ? result : "No posts found for the topic \"" + topic + "\".\n";
 }
+
