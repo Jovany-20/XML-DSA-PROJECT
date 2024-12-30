@@ -155,7 +155,17 @@ int main(int argc, char* argv[]) {
         cout << "\n\n";
         
     }else if (command == "draw") {
-        cout << "Graph visualization is implemented in GUI.\n";
+        
+        map<string, vector<string>> users;
+        vector<string> parsedXML = parseXML(xmlData);
+        NetworkAnalysis(users, parsedXML);
+        printUsers(users);
+        save_graph_to_dot(users, "user_graph.dot");
+        generate_image("user_graph.dot", outputFile);
+        cout << "Graph saved to " << outputFile << endl;
+
+
+
     }
     else if (command == "most_influencer") {
         map<string, vector<string>> users;

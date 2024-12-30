@@ -19,4 +19,5 @@
 #include "../Header Files/mostActiveUser.h"
 #include "../Header Files/SuggestUsers_H.h"
 #include "../Header Files/PostSearchFunctions.h"
+#include "../Header Files/drawGraph.h"
 #endif
