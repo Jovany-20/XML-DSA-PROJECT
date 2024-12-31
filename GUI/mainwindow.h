@@ -85,6 +85,8 @@ private slots:
 
     void on_mutualFriendsButton_clicked();
 
+    void on_mutualFriendsButton_2_clicked();
+
 private:
     Ui::MainWindow *ui;
 

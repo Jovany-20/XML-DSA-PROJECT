@@ -12,20 +12,25 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
+
+
+
+
+
 set(PROJECT_SOURCES
         main.cpp
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
-	XML_Validator.cpp
+        XML_Validator.cpp
         XML_Validor.h
         XML_Fix.cpp
         XML_Fix.h
         format.h
         format.cpp
         Tree.h
-	xmltojson.h
-	xmltojson.cpp
+        xmltojson.h
+        xmltojson.cpp
         decompression.h
         decompression.cpp
         compression.h
@@ -40,6 +45,9 @@ set(PROJECT_SOURCES
         Most_followers.cpp
         minifying.h
         minifying.cpp
+        SuggestUsers.cpp
+        SuggestUsers_H.h
+
 )
 
 # Copy the icons folder to the build directory

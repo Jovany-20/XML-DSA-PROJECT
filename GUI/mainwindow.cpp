@@ -15,6 +15,7 @@
 #include "Most_followers.h"
 #include "minifying.h"
 #include "mutual_followers.h"
+#include "SuggestUsers_H.h"
 
 
 #include <QFileDialog> // for browse button
@@ -30,6 +31,7 @@
 #include <QTextDocument>
 #include <QTextBlock>
 #include <QPixmap>   // For setting custom icon
+#include <QInputDialog>
 
 
 
@@ -486,5 +488,31 @@ void MainWindow::on_mutualFriendsButton_clicked()
     QString message = "users has user(s) \n" + QString::fromStdString(mutualFollowersBetween_n_Users(users, userIds)) + "\n as a mutual friend(s)";
     // Display the message in a message box
     QMessageBox::information(this, "mutual Friends", message);
+}
+
+
+void MainWindow::on_mutualFriendsButton_2_clicked()
+{
+    string userId ;
+    bool ok;
+    int userNumber = QInputDialog::getInt(this, tr("User Input"),
+                                          tr("Enter the user ID to Suggest Friends:"), 0, 0, 100, 1, &ok);
+
+
+    userId = to_string(userNumber);
+
+    map<string, vector<string>> users;
+    vector<string> parsedXML = parseXML(inputString);
+    NetworkAnalysis(users, parsedXML);
+
+    vector<string> suggested = suggestUsersToFollow(users, userId);
+    QString message = "Suggested users for user " + QString::fromStdString(userId) + " is/are :\n" ;
+    for (const auto& user : suggested) {
+        message += "user " + QString::fromStdString(user) + "\n"; // Add each user and a newline
+    }
+
+    // Display the message in a message box
+    QMessageBox::information(this, "Suggested Users", message);
+
 }
 

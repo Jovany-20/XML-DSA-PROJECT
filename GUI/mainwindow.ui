@@ -17,7 +17,7 @@
    <widget class="QPushButton" name="pushButton">
     <property name="geometry">
      <rect>
-      <x>280</x>
+      <x>170</x>
       <y>10</y>
       <width>83</width>
       <height>29</height>
@@ -79,7 +79,7 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>120</x>
+      <x>130</x>
       <y>40</y>
       <width>41</width>
       <height>20</height>
@@ -179,7 +179,7 @@
     <property name="geometry">
      <rect>
       <x>550</x>
-      <y>530</y>
+      <y>580</y>
       <width>71</width>
       <height>21</height>
      </rect>
@@ -192,7 +192,7 @@
     <property name="geometry">
      <rect>
       <x>430</x>
-      <y>530</y>
+      <y>580</y>
       <width>111</width>
       <height>21</height>
      </rect>
@@ -209,32 +209,6 @@
     </property>
     <property name="text">
      <string>start visualization</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="mostActiveUserButton">
-    <property name="geometry">
-     <rect>
-      <x>430</x>
-      <y>440</y>
-      <width>191</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>most active user</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="mostActiveUserButton_2">
-    <property name="geometry">
-     <rect>
-      <x>430</x>
-      <y>480</y>
-      <width>191</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>most followers</string>
     </property>
    </widget>
    <widget class="QPushButton" name="SaveButton">
@@ -263,31 +237,52 @@
      <string>XML Orerations :</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_5">
+   <widget class="QWidget" name="">
     <property name="geometry">
      <rect>
       <x>430</x>
-      <y>410</y>
-      <width>201</width>
-      <height>20</height>
+      <y>400</y>
+      <width>197</width>
+      <height>166</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Network Analysis operations :</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="mutualFriendsButton">
-    <property name="geometry">
-     <rect>
-      <x>430</x>
-      <y>570</y>
-      <width>191</width>
-      <height>31</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Find mutual frined</string>
-    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_3">
+     <item>
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Network Analysis operations :</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="mostActiveUserButton">
+       <property name="text">
+        <string>Most Active User</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="mostActiveUserButton_2">
+       <property name="text">
+        <string>Most Followers</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="mutualFriendsButton">
+       <property name="text">
+        <string>Find mutual Friends</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="mutualFriendsButton_2">
+       <property name="text">
+        <string>Suggest Friends</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
