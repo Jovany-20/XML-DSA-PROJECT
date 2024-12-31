@@ -45,20 +45,18 @@ The following is a comprehensive list of commands available in the XML Editor an
 
 | Command        | Description                                       | Example Command                                              |
 |----------------|---------------------------------------------------|--------------------------------------------------------------|
-| `verify`       | Validate an XML file and optionally fix it.       | `./xml_editor verify -i input.xml -f -o fixed.xml`  |
-| `format`       | Prettify an XML file for readability.             | `./xml_editor format -i input.xml -o formatted.xml` |
-| `json`         | Convert XML to JSON format.                       | `./xml_editor json -i input.xml -o output.json`     |
-| `mini`         | Minify XML by removing unnecessary spaces.        | `./xml_editor mini -i input.xml -o minified.xml`    |
-| `minify`       | Minify XML by removing unnecessary spaces.        | `./xml_editor minify -i input.xml -o minified.xml`  |
-| `compress`     | Compress an XML file into a custom format.        | `./xml_editor compress -i input.xml -o compressed.xml` |
-| `decompress`   | Restore compressed XML to its original form.      | `./xml_editor decompress -i compressed.xml -o output.xml` |
-| `cascade`      | Perform a sequence of operations on an XML file.  | `./xml_editor cascade -i input.xml -o final.xml -ops verify format minify json` |
-| `draw`         | Draw XML data as a graph.                         | `./xml_editor draw -i input.xml -o graph.png`       |
-| `most_active`  | Find the most active user in the XML data.        | `./xml_editor most_active -i input.xml`             |
-| `most_influencer` | Find the most influential user in the XML data.| `./xml_editor most_influencer -i input.xml`         |
-| `mutual`       | Find mutual users for given user IDs.              | `./xml_editor mutual -i input.xml -ids 1,2,3`       |
-| `suggest`      | Suggest users for a given user ID.                | `./xml_editor suggest -i input.xml -id 1`           |
-| `search`       | Search posts by word or topic.                    | `./xml_editor search -i input.xml -w word -t topic` |
+| `verify`       | Validate an XML file and optionally fix it.       | `./xml_editor verify -i input_file.xml -o output_file.xml`  |
+| `format`       | Prettify an XML file for readability.             | `./xml_editor format -i input_file.xml -o output_file.xml` |
+| `json`         | Convert XML to JSON format.                       | `./xml_editor json -i input_file.xml -o output_file.json`     |
+| `mini`         | Minify XML by removing unnecessary spaces.        | `./xml_editor mini -i input_file.xml -o output_file.xml`    |
+| `compress`     | Compress an XML file into a custom format.        | `./xml_editor compress -i input_file.xml -o output_file.comp` |
+| `decompress`   | Restore compressed XML to its original form.      | `./xml_editor decompress -i input_file.comp -o output_file.xml` |
+| `draw`         | Draw XML data as a graph.                         | `./xml_editor draw -i input_file.xml -o output_file.jpg`       |
+| `most_active`  | Find the most active user in the XML data.        | `./xml_editor most_active -i input_file.xml`             |
+| `most_influencer` | Find the most influential user in the XML data.| `./xml_editor most_influencer -i input_file.xml`         |
+| `mutual`       | Find mutual users for given user IDs.              | `./xml_editor mutual -i input_file.xml -ids 1,2,3`       |
+| `suggest`      | Suggest users for a given user ID.                | `./xml_editor suggest -i input_file.xml -id 1`           |
+| `search`       | Search posts by word or topic.                    | `./xml_editor search -w word -t topic -i input_file.xml  ` |
 
 
 ---
